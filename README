@@ -19,9 +19,6 @@ Mandatory :
   Unzip, 7-Zip (7z), PKZip (pkzipc), and WinZip (wzunzip) are some such known
   programs that serve the purpose when invoked with appropriate command/options.
 
-Optional :
-
-* Bash [Needed only if you want to use wrapper docx2txt.sh]
 
 
 How to Use
@@ -30,23 +27,7 @@ How to Use
 You can do the text conversion in different ways depending upon your usage
 environment.
 
-1. Using docx2txt.sh :
-
-   docx2txt.sh file.docx
-          OR
-   docx2txt.sh file
-
-   In both these cases output text will be saved in file.txt .
-
-2. Using docx2txt.bat :
-
-   docx2txt.bat file.docx
-          OR
-   docx2txt.bat file
-
-   In both these cases output text will be saved in file.txt .
-
-3. Using docx2txt.pl :
+1. Using docx2txt.pl :
 
    a. docx2txt.pl infile.docx outfile.txt
 
