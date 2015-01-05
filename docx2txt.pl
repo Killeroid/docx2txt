@@ -112,33 +112,14 @@ our $config_unzip_opts = '-p';		# To extract file on standard output
 
 our $config_newLine = "\n";		# Alternative is "\r\n".
 our $config_lineWidth = 80;		# Line width, used for short line justification.
-our $config_showHyperLink = "N";	# Show hyperlink alongside linked text.
-our $config_tempDir;			# Directory for temporary file creation.
-our $config_twipsPerChar = 120;		# Approx mapping for layout purpose.
+our $config_showHyperLink = "Y";	# Show hyperlink alongside linked text.
+our $config_tempDir = "/tmp";		# Directory for temporary file creation.
+our $config_twipsPerChar = 240;		# Approx mapping for layout purpose.
+our $nullDevice = "/dev/null";   	# Dell null
 
+our $userConfigDir = $ENV{HOME};	#User home dir
+our $systemConfigDir = "/etc";		#System wide config dir
 
-#
-# Windows/Non-Windows specific settings. Adjust these here, if needed.
-#
-
-if ($ENV{OS} =~ /^Windows/ && !(exists $ENV{OSTYPE} || exists $ENV{HOME})) {
-    $nullDevice = "nul";
-    $userConfigDir = $ENV{APPDATA};
-
-    #
-    # On Windows, configuration file is installed in same folder as this script.
-    #
-    $0 =~ m%^(.*[/\\])[^/\\]*?$%;
-    $systemConfigDir = $1;
-
-    $config_tempDir = "$ENV{TEMP}";
-} else {
-    $nullDevice = "/dev/null";
-    $userConfigDir = $ENV{HOME};
-    $systemConfigDir = "/etc";
-
-    $config_tempDir = "/tmp";
-}
 
 
 #
@@ -284,10 +265,8 @@ die $usage if (@ARGV > 2 || $ARGV[0] eq '-h');
 
 my %config;
 
-if (-f "docx2txt.config") {
-    %config = do 'docx2txt.config';
-} elsif (-f "$userConfigDir/docx2txt.config") {
-    %config = do "$userConfigDir/docx2txt.config";
+if (-f "$userConfigDir/.docx2txt") {
+    %config = do "$userConfigDir/.docx2txt";
 } elsif (-f "$systemConfigDir/docx2txt.config") {
     %config = do "$systemConfigDir/docx2txt.config";
 }
